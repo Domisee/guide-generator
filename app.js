@@ -6,7 +6,7 @@ const result=document.querySelector("#result");
 const code=document.querySelector("#code");
 const copy=document.querySelector("#copy");
 
-function validBattleTag(value){return /^[^#\\s#]{3,24}#[0-9]{4,8}$/.test(value.trim())}
+function validBattleTag(value){return /^[^#\s#]{3,24}#[0-9]{4,8}$/.test(value.trim())}
 
 async function loadVersion(){
   try{
@@ -16,14 +16,27 @@ async function loadVersion(){
     version.textContent=data.tag_name||data.name||"okänd";
   }catch{version.textContent="kunde inte hämtas"}
 }
-generate.addEventListener("click",()=>{
+
+generate.addEventListener("click",async()=>{
   const tag=tagInput.value.trim();
   message.textContent="";
   result.classList.add("hidden");
   if(!validBattleTag(tag)){message.textContent="Ange en giltig BattleTag, t.ex. Player#1234.";return}
-  message.textContent="BattleTag godkänd. Den riktiga server-side generatorn behöver kopplas in för att skapa importkoden.";
+  message.textContent="BattleTag godkänd. Kontrollerar generatorn…";
+  try{
+    const response=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({battleTag:tag})});
+    if(!response.ok) throw new Error();
+    const data=await response.json();
+    if(!data.importCode) throw new Error();
+    code.value=data.importCode;
+    result.classList.remove("hidden");
+    message.textContent="Importkod skapad.";
+  }catch{
+    message.textContent="Generatorn är ännu inte ansluten till en legitim server-side RestedXP-generator. Ingen falsk importkod visas.";
+  }
 });
 copy.addEventListener("click",async()=>{
+  if(!code.value) return;
   await navigator.clipboard.writeText(code.value);
   copy.textContent="Kopierad!";
   setTimeout(()=>copy.textContent="Kopiera",1200);
