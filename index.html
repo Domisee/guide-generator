@@ -4,8 +4,12 @@
 <body><main class="shell"><section class="card hero">
 <div class="badge">RESTEDXP · CLASSIC FOREVER</div>
 <h1>Senaste Forever-guiderna</h1>
-<p class="lead">Tjänsten hämtar automatiskt den senaste RestedXP-releasen och visar guiderna som är märkta för Classic Forever. Ingen fil behöver laddas ner.</p>
-<div class="status"><span class="dot"></span><span>Senaste version: <strong id="version">hämtar…</strong></span></div>
+<p class="lead">Hämtar automatiskt den senaste RestedXP-releasen. Sök, filtrera och öppna guiderna direkt i webbläsaren — ingen nedladdning behövs.</p>
+<div class="status"><span class="dot"></span><span>Senaste version: <strong id="version">hämtar…</strong></span><a id="release" class="release" hidden target="_blank" rel="noopener">Release</a></div>
+<div class="toolbar">
+<input id="search" type="search" placeholder="Sök guide, klass eller zon…" autocomplete="off">
+<select id="faction"><option value="all">Alla</option><option value="alliance">Alliance</option><option value="horde">Horde</option><option value="other">Övriga</option></select>
+</div>
 <p id="message" class="message"></p>
 <div id="guides" class="guides"></div>
 </section></main><script src="app.js"></script></body></html>
