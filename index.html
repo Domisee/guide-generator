@@ -1,42 +1,11 @@
 <!doctype html>
 <html lang="sv">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Guide-generator</title>
-  <meta name="description" content="Webbaserad RestedXP Guide-generator">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <main class="shell">
-    <section class="card hero">
-      <div class="badge">RESTEDXP · GUIDE GENERATOR</div>
-      <h1>Guide-generator</h1>
-      <p class="lead">Kontrollera senaste versionen och få din legitima RestedXP-export direkt i webbläsaren.</p>
-
-      <label for="battletag">BattleTag</label>
-      <div class="row">
-        <input id="battletag" placeholder="Player#1234" autocomplete="off">
-        <button id="generate">Kontrollera</button>
-      </div>
-      <p id="message" class="message"></p>
-
-      <div class="status">
-        <span class="dot"></span>
-        <span>Senaste RestedXP: <strong id="version">hämtar…</strong></span>
-      </div>
-
-      <div id="result" class="result hidden">
-        <h2>Din RestedXP-export</h2>
-        <p id="exportHelp"></p>
-        <a id="accountLink" class="secondary link-button" href="https://account.restedxp.com/" target="_blank" rel="noopener">Öppna RestedXP-kontot</a>
-        <label for="code">Klistra in exportsträngen</label>
-        <textarea id="code" placeholder="Klistra in din riktiga RestedXP-export här…" spellcheck="false"></textarea>
-        <button id="copy" class="secondary">Kopiera</button>
-        <p class="note">RestedXP binder guider till ditt konto och Battle.net-ID. Av säkerhets- och behörighetsskäl hämtar den här tjänsten inte dina RestedXP-uppgifter eller lösenord.</p>
-      </div>
-    </section>
-  </main>
-  <script src="app.js"></script>
-</body>
-</html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RestedXP Classic Forever</title><meta name="description" content="Senaste RestedXP-guiderna för WoW Classic Forever."><link rel="stylesheet" href="style.css"></head>
+<body><main class="shell"><section class="card hero">
+<div class="badge">RESTEDXP · CLASSIC FOREVER</div>
+<h1>Senaste Forever-guiderna</h1>
+<p class="lead">Tjänsten hämtar automatiskt den senaste RestedXP-releasen och visar guiderna som är märkta för Classic Forever. Ingen fil behöver laddas ner.</p>
+<div class="status"><span class="dot"></span><span>Senaste version: <strong id="version">hämtar…</strong></span></div>
+<p id="message" class="message"></p>
+<div id="guides" class="guides"></div>
+</section></main><script src="app.js"></script></body></html>
