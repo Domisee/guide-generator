@@ -5,6 +5,7 @@ const version=document.querySelector("#version");
 const result=document.querySelector("#result");
 const code=document.querySelector("#code");
 const copy=document.querySelector("#copy");
+const exportHelp=document.querySelector("#exportHelp");
 
 function validBattleTag(value){return /^[^#\s#]{3,24}#[0-9]{4,8}$/.test(value.trim())}
 
@@ -22,17 +23,24 @@ generate.addEventListener("click",async()=>{
   message.textContent="";
   result.classList.add("hidden");
   if(!validBattleTag(tag)){message.textContent="Ange en giltig BattleTag, t.ex. Player#1234.";return}
-  message.textContent="BattleTag godkänd. Kontrollerar generatorn…";
+  message.textContent="Kontrollerar BattleTag och senaste version…";
   try{
     const response=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({battleTag:tag})});
     const data=await response.json().catch(()=>({}));
+    if(data.latestVersion) version.textContent=data.latestVersion;
+    if(data.requiresAccount){
+      exportHelp.textContent=data.message;
+      result.classList.remove("hidden");
+      message.textContent="Nästa steg visas nedan.";
+      return;
+    }
     if(!response.ok) throw new Error(data.error||"Generatorfel");
     if(!data.importCode) throw new Error("Ingen importkod");
     code.value=data.importCode;
     result.classList.remove("hidden");
     message.textContent="Importkod skapad.";
-  }catch(error){
-    message.textContent=error.message==="Generatorn är ännu inte ansluten till en legitim server-side RestedXP-generator."?error.message:"Ingen riktig importkod kunde skapas ännu.";
+  }catch{
+    message.textContent="Kunde inte kontrollera RestedXP just nu.";
   }
 });
 copy.addEventListener("click",async()=>{
