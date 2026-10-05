@@ -12,12 +12,12 @@
     <section class="card hero">
       <div class="badge">RESTEDXP · GUIDE GENERATOR</div>
       <h1>Guide-generator</h1>
-      <p class="lead">Hämta senaste versionen och förbered din guideimport direkt i webbläsaren.</p>
+      <p class="lead">Kontrollera senaste versionen och få din legitima RestedXP-export direkt i webbläsaren.</p>
 
       <label for="battletag">BattleTag</label>
       <div class="row">
         <input id="battletag" placeholder="Player#1234" autocomplete="off">
-        <button id="generate">Generera</button>
+        <button id="generate">Kontrollera</button>
       </div>
       <p id="message" class="message"></p>
 
@@ -27,12 +27,13 @@
       </div>
 
       <div id="result" class="result hidden">
-        <div class="result-head">
-          <h2>Importkod</h2>
-          <button id="copy" class="secondary">Kopiera</button>
-        </div>
-        <textarea id="code" readonly></textarea>
-        <p class="note">Importkoden måste komma från den riktiga RestedXP-generatorn och vara bunden till rätt Battle.net-konto. Den här klienten skapar inte påhittade koder.</p>
+        <h2>Din RestedXP-export</h2>
+        <p id="exportHelp"></p>
+        <a id="accountLink" class="secondary link-button" href="https://account.restedxp.com/" target="_blank" rel="noopener">Öppna RestedXP-kontot</a>
+        <label for="code">Klistra in exportsträngen</label>
+        <textarea id="code" placeholder="Klistra in din riktiga RestedXP-export här…" spellcheck="false"></textarea>
+        <button id="copy" class="secondary">Kopiera</button>
+        <p class="note">RestedXP binder guider till ditt konto och Battle.net-ID. Av säkerhets- och behörighetsskäl hämtar den här tjänsten inte dina RestedXP-uppgifter eller lösenord.</p>
       </div>
     </section>
   </main>
