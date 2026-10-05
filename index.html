@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Guide-generator</title>
+  <meta name="description" content="Webbaserad RestedXP Guide-generator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="card hero">
+      <div class="badge">RESTEDXP · GUIDE GENERATOR</div>
+      <h1>Guide-generator</h1>
+      <p class="lead">Hämta senaste versionen och förbered din guideimport direkt i webbläsaren.</p>
+
+      <label for="battletag">BattleTag</label>
+      <div class="row">
+        <input id="battletag" placeholder="Player#1234" autocomplete="off">
+        <button id="generate">Generera</button>
+      </div>
+      <p id="message" class="message"></p>
+
+      <div class="status">
+        <span class="dot"></span>
+        <span>Senaste RestedXP: <strong id="version">hämtar…</strong></span>
+      </div>
+
+      <div id="result" class="result hidden">
+        <div class="result-head">
+          <h2>Importkod</h2>
+          <button id="copy" class="secondary">Kopiera</button>
+        </div>
+        <textarea id="code" readonly></textarea>
+        <p class="note">Importkoden måste komma från den riktiga RestedXP-generatorn och vara bunden till rätt Battle.net-konto. Den här klienten skapar inte påhittade koder.</p>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
