@@ -10,10 +10,10 @@ function validBattleTag(value){return /^[^#\s#]{3,24}#[0-9]{4,8}$/.test(value.tr
 
 async function loadVersion(){
   try{
-    const r=await fetch("https://api.github.com/repos/RestedXP/RXPGuides/releases/latest",{headers:{"Accept":"application/vnd.github+json"}});
+    const r=await fetch("/api/version");
     if(!r.ok) throw new Error();
     const data=await r.json();
-    version.textContent=data.tag_name||data.name||"okänd";
+    version.textContent=data.version||"okänd";
   }catch{version.textContent="kunde inte hämtas"}
 }
 
@@ -25,14 +25,14 @@ generate.addEventListener("click",async()=>{
   message.textContent="BattleTag godkänd. Kontrollerar generatorn…";
   try{
     const response=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({battleTag:tag})});
-    if(!response.ok) throw new Error();
-    const data=await response.json();
-    if(!data.importCode) throw new Error();
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok) throw new Error(data.error||"Generatorfel");
+    if(!data.importCode) throw new Error("Ingen importkod");
     code.value=data.importCode;
     result.classList.remove("hidden");
     message.textContent="Importkod skapad.";
-  }catch{
-    message.textContent="Generatorn är ännu inte ansluten till en legitim server-side RestedXP-generator. Ingen falsk importkod visas.";
+  }catch(error){
+    message.textContent=error.message==="Generatorn är ännu inte ansluten till en legitim server-side RestedXP-generator."?error.message:"Ingen riktig importkod kunde skapas ännu.";
   }
 });
 copy.addEventListener("click",async()=>{
