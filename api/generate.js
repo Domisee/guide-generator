@@ -11,9 +11,9 @@ export default async function handler(req,res){
   if(!release.ok) return res.status(502).json({error:"Kunde inte hämta senaste RestedXP-versionen"});
   const data=await release.json();
 
-  // Intentionally does not generate or forge account-bound RestedXP keys/imports.
-  return res.status(403).json({
-    error:"Riktig RestedXP-import kräver en legitim generator/auktorisering.",
-    latestVersion:data.tag_name||data.name||null
+  return res.status(200).json({
+    requiresAccount:true,
+    latestVersion:data.tag_name||data.name||null,
+    message:"RestedXP binder guider till ditt konto och Battle.net-ID. Logga in på ditt RestedXP-konto, exportera din guide och klistra in exportsträngen här. Den här tjänsten hanterar inte ditt lösenord och försöker inte kringgå RestedXPs kontoskydd."
   });
 }
